@@ -31,7 +31,7 @@ jobs:
       
       # Run Tests
       - name: Run All Tests
-        uses: game-ci/unity-test-runner@v2.0-alpha-6
+        uses: game-ci/unity-test-runner@v2.0.0-alpha-7
         id: tests
         with:
          unityVersion: ${{ env.UNITY_VERSION }}

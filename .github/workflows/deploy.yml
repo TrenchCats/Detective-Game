@@ -95,7 +95,7 @@ jobs:
             Library-
 
       - name: Build
-        uses: game-ci/unity-builder@v2.0-alpha-13
+        uses: game-ci/unity-builder@v2.0.0-alpha-14
         with:
           buildName: Example Project
           projectPath: ${{ env.PROJECT_PATH }}

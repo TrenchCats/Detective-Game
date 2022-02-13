@@ -8,7 +8,7 @@ on:
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   UNITY_VERSION: 2020.1.15f1
-  PROJECT_PATH: Test
+  PROJECT_PATH: Detective-Game
 
 jobs:
   bump-semver:
@@ -34,7 +34,7 @@ jobs:
         if: ${{ steps.get-merged-pull-request.outputs.title != null }}
         with:
           labels: ${{ steps.get-merged-pull-request.outputs.labels }}
-      
+
       - name: Exit if no tags found
         if: ${{ steps.release-label.outputs.level == null }}
         run: |
@@ -52,7 +52,7 @@ jobs:
         with:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
-  
+
   check-license:
     name: Check for Unity License
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
         uses: actions/checkout@v2.3.4
         with:
           lfs: true
-          
+
       - name: Cache files 
         uses: actions/cache@v2.1.6
         with:
@@ -93,7 +93,7 @@ jobs:
           restore-keys: |
             Library-${{ env.PROJECT_PATH }}-
             Library-
-      
+
       - name: Build
         uses: game-ci/unity-builder@v2.0-alpha-13
         with:
@@ -109,7 +109,7 @@ jobs:
         with:
           name: Build
           path: build
-    
+
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
@@ -133,7 +133,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           exclude_types: other,doc,chore
           config_file: .github/changelog-config.js
-      
+
       - name: Download Artifacts
         uses: actions/download-artifact@v2.0.10
         with:
@@ -147,7 +147,7 @@ jobs:
         run: |
           cd build
           for file in $(ls -I "*.zip"); do zip -r "${file}.zip" "$file"; done
-    
+
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v0.1.13
@@ -161,7 +161,7 @@ jobs:
           draft: false
           prerelease: false
           files: build/*.zip
-      
+
       - name: Create Comment about Release
         uses: actions-ecosystem/action-create-comment@v1.0.0
         if: ${{ needs.bump-semver.outputs.version != null }}

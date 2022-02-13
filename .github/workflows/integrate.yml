@@ -1,13 +1,13 @@
 name: Integrate
- 
+
 on:
   pull_request:
     branches: [ main ]
 
 env:
- UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
- UNITY_VERSION: 2020.1.15f1
- PROJECT_PATH: Detective-Game
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_VERSION: 2020.1.15f1
+  PROJECT_PATH: Detective-Game
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
       # Checkout code
       - name: Checkout Code
         uses: actions/checkout@v2.3.4
-      
+
       # Cache Library Files
       - name: Cache
         uses: actions/cache@v2.1.6
@@ -28,7 +28,7 @@ jobs:
          key: Library-${{ env.projectPath }}
          restore-keys: |
           Library-
-      
+
       # Run Tests
       - name: Run All Tests
         uses: game-ci/unity-test-runner@v2.0-alpha-6
@@ -40,7 +40,7 @@ jobs:
          customParameters: -nographics -debugCodeOptimization -enableCodeCoverage -coverageResultsPath ./coverage-results -coverageOptions generateAdditionalMetrics
          githubToken: ${{ secrets.GITHUB_TOKEN }}
          checkName: Test Results (All)
-      
+
       # Upload Results
       - name: Upload Results
         uses: actions/upload-artifact@v2.2.4
@@ -48,7 +48,7 @@ jobs:
         with:
          name: Test Results (All)
          path: ${{ steps.tests.outputs.artifactsPath }}
-      
+
       - name: Upload Codecov Report
         uses: codecov/codecov-action@v2
         with:
@@ -56,7 +56,7 @@ jobs:
           flags: automated
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ${{ env.PROJECT_PATH }}/coverage-results/**/*.xml
- 
+
   linter:
     name: Lint code base 🖥️
     runs-on: ubuntu-latest

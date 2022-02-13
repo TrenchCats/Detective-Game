@@ -59,7 +59,7 @@ jobs:
     needs: [bump-semver]
     outputs:
       is_unity_license_set: ${{ steps.check-license.outputs.is_unity_license_set }}
-    steps: 
+    steps:
       - name: Check whether Unity Activation requests should be done
         id: check-license
         run: |
@@ -85,7 +85,7 @@ jobs:
         with:
           lfs: true
 
-      - name: Cache files 
+      - name: Cache files
         uses: actions/cache@v2.1.6
         with:
           path: ${{ env.PROJECT_PATH }}/Library

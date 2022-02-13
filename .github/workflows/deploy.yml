@@ -8,7 +8,7 @@ on:
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
   UNITY_VERSION: 2020.1.15f1
-  PROJECT_PATH: Test
+  PROJECT_PATH: Detective-Game
 
 jobs:
   bump-semver:

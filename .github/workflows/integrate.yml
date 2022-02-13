@@ -5,9 +5,9 @@ on:
     branches: [ main ]
 
 env:
- UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
- UNITY_VERSION: 2020.1.15f1
- PROJECT_PATH: Test
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+  UNITY_VERSION: 2020.3.28f1
+  PROJECT_PATH: Detective-Game
 
 jobs:
   test:

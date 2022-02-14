@@ -170,7 +170,7 @@ jobs:
           number: ${{ needs.bump-semver.outputs.number }}
           body: |
             The new version [${{ needs.bump-semver.outputs.version }}](https://github.com/${{ github.repository }}/releases/tag/${{ needs.bump-semver.outputs.version }}) has been released :tada:
-    
+
       - name: Send Discord Notification
         uses: appleboy/discord-action@0.0.3
         with:

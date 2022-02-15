@@ -10,7 +10,7 @@ jobs:
     name: Lint Commits
     runs-on: ubuntu-latest
     steps:
-    - name: Lint Commits    
+    - name: Lint Commits
       uses: actions-ecosystem/action-lint-commits@v1
       id: lint-commits
       with:

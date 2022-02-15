@@ -165,3 +165,15 @@ jobs:
           username: ${{ secrets.DISCORD_AVATAR_USERNAME }}
           avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           message: A new update is available for Detective Game [${{ needs.bump-semver.outputs.version }}](https://github.com/${{ github.repository }}/releases/tag/${{ needs.bump-semver.outputs.version }}).
+
+      - name: Send Discord Notification
+        uses: sarisia/actions-status-discord@v1.8.6
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          nodetail: true
+          username: ${{ secrets.DISCORD_AVATAR_USERNAME }}
+          avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
+          title: New version of `Detective Game` is ready!
+          description: |
+            Version `${{ needs.bump-semver.outputs.version }}`
+            Click [here](https://github.com/${{ github.repository }}/releases/tag/${{ needs.bump-semver.outputs.version }}) to download!

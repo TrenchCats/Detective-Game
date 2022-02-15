@@ -33,6 +33,7 @@ jobs:
         id: release-label
         if: ${{ steps.get-merged-pull-request.outputs.title != null }}
         with:
+          label_prefix: "release-"
           labels: ${{ steps.get-merged-pull-request.outputs.labels }}
 
       - name: Get Latest Tag
@@ -159,8 +160,8 @@ jobs:
       - name: Send Discord Notification
         uses: appleboy/discord-action@0.0.3
         with:
-          webhook_id: ${{ secrets.WEBHOOK_ID }}
-          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           username: ${{ secrets.DISCORD_AVATAR_USERNAME }}
           avatar_url: ${{ secrets.DISCORD_AVATAR_URL }}
           message: A new update is available for Detective Game [${{ needs.bump-semver.outputs.version }}](https://github.com/${{ github.repository }}/releases/tag/${{ needs.bump-semver.outputs.version }}).

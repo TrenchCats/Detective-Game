@@ -7,19 +7,19 @@ changelog:
   categories:
     - title: Breaking Changes 🚨
       labels:
-        - release/major
+        - release-major
         - breaking-change
     - title: New Features 🚀
       labels:
-        - release/minor
+        - release-minor
         - enhancement
     - title: Bug Fixes 🐛
       labels:
-        - release/patch
+        - release-patch
         - bug
     - title: Performance Improvements ⚡️
       labels:
-        - release/patch
+        - release-patch
         - perf
     - title: Other Changes
       labels:

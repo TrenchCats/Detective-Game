@@ -20,7 +20,7 @@ jobs:
       number: ${{ steps.get-merged-pull-request.outputs.number }}
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.0
 
       - name: Get Merged Pull Request
         uses: actions-ecosystem/action-get-merged-pull-request@v1.0.1
@@ -79,12 +79,12 @@ jobs:
           - StandaloneLinux64
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.0
         with:
           lfs: true
 
       - name: Cache files
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.1
         with:
           path: ${{ env.PROJECT_PATH }}/Library
           key: Library-${{ env.PROJECT_PATH }}-${{ matrix.targetPlatform }}
@@ -93,7 +93,7 @@ jobs:
             Library-
 
       - name: Build
-        uses: game-ci/unity-builder@v2.0-alpha-13
+        uses: game-ci/unity-builder@v2.0.1
         with:
           buildName: Example Project
           projectPath: ${{ env.PROJECT_PATH }}
@@ -103,7 +103,7 @@ jobs:
           version: ${{ needs.bump-semver.outputs.version }}
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v3.0.0
         with:
           name: Build
           path: build
@@ -114,7 +114,7 @@ jobs:
     needs: [build, bump-semver]
     steps:
       - name: Checkout Project
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.0
 
       - name: Push New Tag
         uses: actions-ecosystem/action-push-tag@v1.0.0
@@ -124,7 +124,7 @@ jobs:
           message: "${{ needs.bump-semver.outputs.version }}: PR #${{ needs.bump-semver.outputs.number }} ${{ needs.bump-semver.outputs.title }}"
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v2.0.10
+        uses: actions/download-artifact@v3.0.0
         with:
           name: Build
           path: build

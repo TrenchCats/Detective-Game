@@ -18,11 +18,11 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout Code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.0
 
       # Cache Library Files
       - name: Cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.1
         with:
          path: ${{ env.projectPath }}/Library
          key: Library-${{ env.projectPath }}
@@ -31,7 +31,7 @@ jobs:
 
       # Run Tests
       - name: Run All Tests
-        uses: game-ci/unity-test-runner@v2.0-alpha-6
+        uses: game-ci/unity-test-runner@v2.0.0
         id: tests
         with:
          unityVersion: ${{ env.UNITY_VERSION }}
@@ -43,14 +43,14 @@ jobs:
 
       # Upload Results
       - name: Upload Results
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v3.0.0
         if: always()
         with:
          name: Test Results (All)
          path: ${{ steps.tests.outputs.artifactsPath }}
 
       - name: Upload Codecov Report
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v2.1.0
         with:
           name: Test Coverage (All)
           flags: automated
@@ -63,13 +63,13 @@ jobs:
     steps:
       # Checkout repo
       - name: Checkout Code
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3.0.0
         with:
           fetch-depth: 0
 
       # Perform Linting
       - name: Perform Linting
-        uses: github/super-linter@v4.7.3
+        uses: github/super-linter@v4.9.2
         env:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_CSHARP: true

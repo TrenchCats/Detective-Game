@@ -1,9 +1,10 @@
 {
-    "name": "EditMode",
+    "name": "MitchDroo.DetectiveGame.Tests.Quests",
+    "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Scripts"
+        "MitchDroo.DetectiveGame.Quests"
     ],
     "includePlatforms": [
         "Editor"
@@ -12,7 +13,11 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll"
+        "nunit.framework.dll",
+        "NSubstitute.dll",
+        "Castle.Core.dll",
+        "System.Runtime.CompilerServices.Unsafe.dll",
+        "System.Threading.Tasks.Extensions.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

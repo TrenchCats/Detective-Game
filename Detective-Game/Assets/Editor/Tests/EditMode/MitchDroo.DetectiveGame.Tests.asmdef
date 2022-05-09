@@ -1,5 +1,5 @@
 {
-    "name": "MitchDroo.DetectiveGame.Tests.Combat",
+    "name": "MitchDroo.DetectiveGame.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

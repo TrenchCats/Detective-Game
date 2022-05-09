@@ -7,29 +7,33 @@ namespace MitchDroo.DetectiveGame.Tests.Core
     public class TimerTests
     {
         [Test]
-        public void SetStartingDuration_GivenDuration()
+        [TestCase(1f)]
+        [TestCase(5f)]
+        [TestCase(36.3f)]
+        public void SetStartingDuration_GivenDuration(float duration)
         {
-            float duration = 1f;
             Timer timer = new Timer(duration);
             Assert.AreEqual(timer.RemainingSeconds, duration);
         }
 
         [Test]
-        public void Tick_AboveZeroSeconds_RemainingSecondsIsReduced()
+        [TestCase(1f, 0.5f)]
+        [TestCase(5f, 3f)]
+        [TestCase(36.3f, 0.5f)]
+        public void Tick_AboveZeroSeconds_RemainingSecondsIsReduced(float duration, float deltaTime)
         {
-            var duration = 1f;
-            var deltaTime = 1f;
             Timer timer = new Timer(duration);
             timer.IsEnabled = true;
-            timer.Tick(duration);
+            timer.Tick(deltaTime);
             Assert.AreEqual(duration - deltaTime, timer.RemainingSeconds);
         }
 
         [Test]
-        public void Tick_AboveZeroSeconds_OnTimerEndIsNotInvoked()
+        [TestCase(1f, 0.5f)]
+        [TestCase(5f, 3f)]
+        [TestCase(36.3f, 0.5f)]
+        public void Tick_AboveZeroSeconds_OnTimerEndIsNotInvoked(float duration, float deltaTime)
         {
-            var duration = 1f;
-            var deltaTime = 0.5f;
             Timer timer = new Timer(duration);
             timer.IsEnabled = true;
             bool isInvoked = false;
@@ -41,10 +45,10 @@ namespace MitchDroo.DetectiveGame.Tests.Core
         }
 
         [Test]
-        public void Tick_BelowZeroSeconds_StopsAtZeroSeconds()
+        [TestCase(0f, 2f)]
+        [TestCase(10f, 20f)]
+        public void Tick_BelowZeroSeconds_StopsAtZeroSeconds(float duration, float deltaTime)
         {
-            var duration = 0f;
-            var deltaTime = 2f;
             Timer timer = new Timer(duration);
             timer.IsEnabled = true;
 
@@ -54,12 +58,13 @@ namespace MitchDroo.DetectiveGame.Tests.Core
         }
 
         [Test]
-        public void Tick_BelowZeroSeconds_OnTimerEndIsInvoked()
+        [TestCase(0f, 2f)]
+        [TestCase(10f, 20f)]
+        public void Tick_BelowZeroSeconds_OnTimerEndIsInvoked(float duration, float deltaTime)
         {
-            var duration = 0f;
-            var deltaTime = 1f;
             Timer timer = new Timer(duration);
             timer.IsEnabled = true;
+
             bool isInvoked = false;
             timer.OnTimerEnd += () => isInvoked = true;
 
@@ -69,10 +74,13 @@ namespace MitchDroo.DetectiveGame.Tests.Core
         }
 
         [Test]
-        public void Tick_DoesNotDecrement_WhenDisabled()
+        [TestCase(0f, 2f)]
+        [TestCase(1f, 0.5f)]
+        [TestCase(5f, 3f)]
+        [TestCase(10f, 20f)]
+        [TestCase(36.3f, 0.5f)]
+        public void Tick_DoesNotDecrement_WhenDisabled(float duration, float deltaTime)
         {
-            var duration = 1f;
-            var deltaTime = 1f;
             Timer timer = new Timer(duration);
             timer.IsEnabled = false;
 

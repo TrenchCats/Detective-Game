@@ -13,20 +13,12 @@ namespace MitchDroo.DetectiveGame.Combat
         /// <summary>
         /// The current health value of the entity
         /// </summary>
-        public int CurrentHealth
-        {
-            get => _currentHealth;
-            set => _currentHealth = value;
-        }
+        public int CurrentHealth => _currentHealth;
 
         /// <summary>
         /// The maximum health value of the entity
         /// </summary>
-        public int MaxHealth
-        {
-            get => _maxHealth;
-            set => _maxHealth = value;
-        }
+        public int MaxHealth => _maxHealth;
 
         /// <summary>
         /// Returns true if <c>CurrentHealth</c> is less than or equal to zero

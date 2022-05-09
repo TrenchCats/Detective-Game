@@ -1,6 +1,6 @@
 using System;
 
-namespace MitchDroo.DetectiveGame.Tests.Core
+namespace MitchDroo.DetectiveGame.Core
 {
     public class Timer
     {

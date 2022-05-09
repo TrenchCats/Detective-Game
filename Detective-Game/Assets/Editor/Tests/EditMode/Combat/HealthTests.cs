@@ -43,7 +43,7 @@ namespace MitchDroo.DetectiveGame.Tests.Combat
             Health health = new Health(maxHealth);
 
             health.TakeDamage(damage);
-            
+
             Assert.AreEqual(maxHealth - damage, health.CurrentHealth);
             Assert.AreEqual(maxHealth, health.MaxHealth);
         }
@@ -87,7 +87,7 @@ namespace MitchDroo.DetectiveGame.Tests.Combat
             health.OnHealthDepleted += () => isInvoked = true;
 
             health.TakeDamage(damage);
-            
+
             Assert.IsTrue(isInvoked);
         }
 

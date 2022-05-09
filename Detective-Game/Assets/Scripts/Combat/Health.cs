@@ -15,7 +15,7 @@ namespace MitchDroo.DetectiveGame.Combat
         /// </summary>
         public int CurrentHealth
         {
-            get => _currentHealth; 
+            get => _currentHealth;
             set => _currentHealth = value;
         }
 

@@ -43,6 +43,43 @@ namespace MitchDroo.DetectiveGame.Tests.Combat
         }
 
         [Test]
+        public void TakeDamage_OnHealthChangedIsInvoked()
+        {
+            Health health = new Health(10);
+            bool isInvoked = false;
+
+            health.OnHealthChanged += (v) => isInvoked = true;
+
+            health.TakeDamage(1);
+
+            Assert.IsTrue(isInvoked);
+        }
+
+        [Test]
+        public void TakeDamage_BelowZeroHealth_OnHealthDepletedIsInvoked()
+        {
+            Health health = new Health(1);
+            bool isInvoked = false;
+            health.OnHealthDepleted += () => isInvoked = true;
+
+            health.TakeDamage(1);
+            
+            Assert.IsTrue(isInvoked);
+        }
+
+        [Test]
+        public void TakeDamage_AboveZeroHealth_OnHealthDepletedIsNotInvoked()
+        {
+            Health health = new Health(2);
+            bool isInvoked = false;
+            health.OnHealthDepleted += () => isInvoked = true;
+
+            health.TakeDamage(1);
+
+            Assert.IsFalse(isInvoked);
+        }
+
+        [Test]
         public void ReceiveHealth_BelowMaxHealth_ReturnsIncrementedHealth()
         {
             Health health = new Health(1, 10);
@@ -58,6 +95,19 @@ namespace MitchDroo.DetectiveGame.Tests.Combat
             health.ReceiveHealth(20);
             Assert.AreEqual(10, health.CurrentHealth);
             Assert.AreEqual(10, health.MaxHealth);
+        }
+
+        [Test]
+        public void ReceiveHealth_OnHealthChangedIsInvoked()
+        {
+            Health health = new Health(1, 10);
+            bool isInvoked = false;
+
+            health.OnHealthChanged += (v) => isInvoked = true;
+
+            health.ReceiveHealth(1);
+
+            Assert.IsTrue(isInvoked);
         }
 
         [Test]

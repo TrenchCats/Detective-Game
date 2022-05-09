@@ -1,3 +1,5 @@
+using System;
+
 namespace MitchDroo.DetectiveGame.Combat
 {
     public class Health
@@ -5,6 +7,9 @@ namespace MitchDroo.DetectiveGame.Combat
         public int CurrentHealth { get; set; }
         public int MaxHealth { get; set; }
         public bool IsDead => CurrentHealth <= 0;
+
+        public event Action<int> OnHealthChanged;
+        public event Action OnHealthDepleted;
 
         public Health(int maxHealth)
         {
@@ -25,6 +30,11 @@ namespace MitchDroo.DetectiveGame.Combat
             {
                 CurrentHealth = 0;
             }
+            if (CurrentHealth <= 0)
+            {
+                OnHealthDepleted?.Invoke();
+            }
+            OnHealthChanged?.Invoke(CurrentHealth);
         }
 
         public void ReceiveHealth(int amount)
@@ -34,6 +44,7 @@ namespace MitchDroo.DetectiveGame.Combat
             {
                 CurrentHealth = MaxHealth;
             }
+            OnHealthChanged?.Invoke(CurrentHealth);
         }
     }
 }

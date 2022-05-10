@@ -1,10 +1,11 @@
 {
-    "name": "MitchDroo.DetectiveGame.Tests.Combat",
+    "name": "MitchDroo.DetectiveGame.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "MitchDroo.DetectiveGame.Combat"
+        "MitchDroo.DetectiveGame.Combat",
+        "MitchDroo.DetectiveGame.Core"
     ],
     "includePlatforms": [
         "Editor"

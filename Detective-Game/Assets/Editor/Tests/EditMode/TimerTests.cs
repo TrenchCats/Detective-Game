@@ -74,6 +74,18 @@ namespace MitchDroo.DetectiveGame.Tests.Core
         }
 
         [Test]
+        public void Tick_BelowZeroSeconds_AutoReset_ResetsTime()
+        {
+            Timer timer = new Timer(1.0f);
+            timer.IsEnabled = true;
+            timer.AutoReset = true;
+
+            timer.Tick(1.0f);
+
+            Assert.AreEqual(1f, timer.RemainingSeconds);
+        }
+
+        [Test]
         [TestCase(0f, 2f)]
         [TestCase(1f, 0.5f)]
         [TestCase(5f, 3f)]
@@ -91,6 +103,28 @@ namespace MitchDroo.DetectiveGame.Tests.Core
 
             Assert.AreEqual(duration, timer.RemainingSeconds);
             Assert.IsFalse(isInvoked);
+        }
+
+        [Test]
+        public void Start_StartsTheTimer()
+        {
+            Timer timer = new Timer(1f);
+            timer.IsEnabled = false;
+
+            timer.Start();
+
+            Assert.AreEqual(true, timer.IsEnabled);
+        }
+
+        [Test]
+        public void Stop_StopsTheTimer()
+        {
+            Timer timer = new Timer(1f);
+            timer.IsEnabled = true;
+
+            timer.Stop();
+
+            Assert.AreEqual(false, timer.IsEnabled);
         }
     }
 }

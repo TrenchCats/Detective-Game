@@ -2,46 +2,56 @@ using System;
 
 namespace MitchDroo.DetectiveGame.Core
 {
-    public class Timer
+    /// <summary>
+    /// A countdown timer
+    /// </summary>
+    public class Timer : ITimer
     {
-        private float _duration;
-
+        /// <inheritdoc/>
         public float RemainingSeconds { get; set; }
-        public bool IsEnabled { get; set; }
+        /// <inheritdoc/>
         public bool AutoReset { get; set; }
-
+        /// <inheritdoc/>
+        public bool IsEnabled { get; set; }
+        /// <inheritdoc/>
         public event Action OnTimerEnd;
+
+        private readonly float _duration;
 
         public Timer(float duration)
         {
-            _duration = duration;
             RemainingSeconds = duration;
+            _duration = duration;
+            IsEnabled = true;
         }
 
+        /// <inheritdoc/>
         public void Tick(float deltaTime)
         {
             if (!IsEnabled) return;
-
             RemainingSeconds -= deltaTime;
-            if (RemainingSeconds <= 0f)
-            {
-                if (AutoReset)
-                {
-                    RemainingSeconds = _duration;
-                }
-                else
-                {
-                    RemainingSeconds = 0f;
-                }
-                OnTimerEnd?.Invoke();
-            }
+            CheckForTimerEnd();
         }
 
+        /// <summary>
+        /// Checks if the timer has zero remaining seconds remaining.
+        /// If so, it will invoke the OnTimerEnd event.
+        /// If AutoReset is enabled, it will restart the timer
+        /// </summary>
+        private void CheckForTimerEnd()
+        {
+            if (RemainingSeconds > 0f) return;
+            RemainingSeconds = AutoReset ? _duration : 0f;
+            OnTimerEnd?.Invoke();
+        }
+
+        /// <inheritdoc/>
         public void Start()
         {
             IsEnabled = true;
         }
 
+        /// <inheritdoc/>
         public void Stop()
         {
             IsEnabled = false;

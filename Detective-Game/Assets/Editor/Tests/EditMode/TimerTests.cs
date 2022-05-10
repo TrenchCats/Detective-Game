@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using MitchDroo.DetectiveGame.Core;
+using NUnit.Framework;
 
 namespace MitchDroo.DetectiveGame.Tests.Core
 {
